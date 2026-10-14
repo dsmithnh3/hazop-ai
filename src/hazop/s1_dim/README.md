@@ -94,3 +94,20 @@ sparser than on the deterministic path, and that is shown, not hidden
 - Two page-6 dryer-heater zigzag arrowheads remain `angle`-subclass entries
   in the valve index (they drop out of the topology; no pipes attach).
 - Gate/globe/butterfly valves are still one `gate` class.
+
+## Geometric workbench
+
+Start `python -m hazop.s1_dim.app` and open
+`http://127.0.0.1:8777/geometry` for the original 2401 results (process sheets
+4-12). The read-only workbench supports source overlays, geometry-only and
+source-only views, tag search, selectable nodes/routes, layer toggles,
+pan/zoom, direction evidence and per-sheet JSON download. It uses the DiagEx
+results viewer's light three-panel layout. Extraction coordinates and records
+are preserved; unknown flow directions have no arrow.
+
+The default source PDF is the sibling `pidgraph/2401单元工艺管道及仪表流程图.pdf`.
+`HAZOP_GEOMETRY_PDF` and `HAZOP_GEOMETRY_OUTPUT` can point to the matching PDF
+and topology directory for this reference dataset. Use the exact PDF coordinate
+frame used during extraction (the normalized PDF for normalized runs). Without
+that PDF, the workbench still displays the saved geometry. This reference
+browser does not change the existing upload and validation workflow.

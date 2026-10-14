@@ -14,6 +14,7 @@ from flask import (Flask, redirect, render_template_string, request,
 
 from hazop.authgate import install_password_gate
 from hazop.s1_dim.pipeline import run as run_pipeline
+from hazop.s1_dim.geometry_workbench import bp as geometry_blueprint
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 # HAZOP_DIM_RUNS points the validator at an existing review history — e.g. the
@@ -22,6 +23,7 @@ RUNS = os.path.abspath(os.environ.get("HAZOP_DIM_RUNS",
                                       os.path.join(BASE, "runs")))
 
 app = Flask(__name__)
+app.register_blueprint(geometry_blueprint)
 app.config["MAX_CONTENT_LENGTH"] = 80 * 1024 * 1024
 install_password_gate(app)          # no-op unless HAZOP_WEB_PASSWORD is set
 
@@ -44,6 +46,8 @@ INDEX_HTML = """<!DOCTYPE html>
  .note{color:#999;font-size:13px;line-height:1.5}
 </style></head><body>
 <h1>P&amp;ID Topology Extractor <span style="color:#666;font-size:13px">Stage 1 validator</span></h1>
+<div class="card"><a href="/geometry">Open geometric workbench - original 2401 results</a>
+<p class="note">Browse the nine saved process sheets with source overlays, geometric routes and extraction evidence.</p></div>
 <div class="card">
  <form method="post" action="/upload" enctype="multipart/form-data">
   <label>Vector P&amp;ID PDF (same drawing convention as the 2401 unit set)</label>
